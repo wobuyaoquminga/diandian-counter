@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f8fa">
+  <title>点点计数</title><link rel="stylesheet" href="styles.css"><script src="store.js" defer></script><script src="persistence.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#counters"><span class="brand-icon">▥</span><span>点点计数</span></a>
+    <nav aria-label="页面导航"><a href="#counters" data-page="counters"><span>▦</span>计数任务<span class="nav-count" id="nav-count">0</span></a><a href="#history" data-page="history"><span>◷</span>历史记录</a></nav>
+    <div class="sidebar-bottom"><span class="status-dot"></span><span id="storage-status">本地保存</span></div>
+  </aside>
+  <main>
+    <header class="topbar"><span><span id="breadcrumb">计数任务</span></span><span id="today"></span></header>
+    <p id="loading-status" role="status" style="margin:24px 20px;color:#89909b;font-size:13px">正在读取本地记录…</p>
+    <section id="counters-page" class="page">
+      <div class="page-heading"><div><h1>计数任务<span class="heading-dot">.</span></h1></div><button class="secondary" id="new-task">＋ 新建任务</button></div>
+      <div id="task-empty" class="empty" hidden><h2>暂无任务</h2></div>
+      <div id="task-content" hidden>
+      <div class="task-switcher"><label for="task-select">任务</label><select id="task-select"></select><span id="task-page-position"></span></div>
+      <div class="task-heading"><div><h2 id="task-title"></h2><p id="page-save-status">尚未保存</p></div><div class="task-actions"><button class="secondary danger" id="delete-task">删除任务</button><button class="secondary" id="new-counter">＋ 添加类型</button><button class="primary" id="save-page">保存本页</button></div></div>
+      <div class="stats"><div><span>类型</span><strong id="counter-total">0</strong></div><div><span>总数</span><strong id="value-total">0</strong></div><div><span>保存次数</span><strong id="today-total">0</strong></div></div>
+      <div class="section-heading"><h2>类型与数量 <span id="section-count">0</span></h2></div>
+      <div id="counter-grid" class="counter-grid"></div>
+      <div id="counter-empty" class="empty"><div class="empty-icon">＋</div><h2>暂无类型</h2><button class="primary" id="empty-create">添加类型</button></div>
+      </div>
+    </section>
+    <section id="history-page" class="page" hidden>
+      <div class="page-heading"><div><h1>历史记录<span class="heading-dot">.</span></h1></div><button class="secondary" id="export-history">↓ 导出数据</button></div>
+      <div class="history-tabs" role="group" aria-label="历史记录类型"><button id="saved-pages-tab" class="active" aria-pressed="true">保存记录</button><button id="changes-tab" aria-pressed="false">加减明细</button></div>
+      <div class="history-panel"><div class="history-toolbar"><h2><span class="history-heading-text" id="history-heading-text">保存的页面</span> <span id="history-total">0</span></h2><label class="search">⌕ <input id="history-search" type="search" placeholder="搜索记录" aria-label="搜索历史记录"></label></div><div id="history-list"></div><div id="history-empty" class="empty"><div class="empty-icon">◷</div><h2>暂无记录</h2></div><button id="load-more" class="secondary load-more" hidden>加载更多</button></div>
+    </section>
+
+  </main>
+</div>
+<dialog id="create-dialog"><form id="create-form"><div class="dialog-heading"><h2 id="create-title">添加类型</h2><button type="button" id="close-dialog" class="icon-button" aria-label="关闭">×</button></div><label for="counter-name" id="name-label">类型名称</label><input id="counter-name" placeholder="例如：苹果" maxlength="40" required autocomplete="off"><small id="form-error" role="alert"></small><div class="dialog-actions"><button type="button" id="cancel-dialog" class="secondary">取消</button><button type="submit" class="primary" id="create-submit">添加类型</button></div></form></dialog>
+<div id="toast" role="status" class="toast" hidden></div>
+<dialog id="delete-dialog"><h2 id="delete-title">确认删除</h2><p id="delete-description"></p><div class="dialog-actions"><button type="button" class="secondary" id="delete-cancel" autofocus>取消</button><button type="button" class="primary destructive" id="delete-confirm">确认删除</button></div></dialog>
+</body>
+</html>

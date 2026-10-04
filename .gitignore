@@ -1,0 +1,7 @@
+android/.build/
+android/.signing/
+android/.tools/
+dist/
+
+# Local maintenance helper
+/清理旧文件.ps1
